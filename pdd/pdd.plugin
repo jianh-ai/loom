@@ -2,7 +2,7 @@
 #!desc=
 #!author=RuCu6,ZenmoFeiShi
 #!homepage=
-#!icon=https://raw.kkgithub.com/jianh-ai/loom/main/pdd/pdd.png
+#!icon=https://fastly.jsdelivr.net/gh/jianh-ai/loom/pdd/pdd.png
 #!date=2024-11-28
 
 [Rule]
@@ -37,7 +37,7 @@ URL-REGEX,^http:\/\/\d{1,3}(\.\d{1,3}){3}\/d4\?appid=\d+&os=\d+&clientVersion=[\
 # ^https:\/\/api\.pinduoduo\.com\/search_hotquery\? reject-dict
 
 [Script]
-http-response ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? script-path=https://raw.kkgithub.com/jianh-ai/loom/main/pdd/pdd.js,requires-body=true,tag=精简首页
+http-response ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? script-path=https://fastly.jsdelivr.net/gh/jianh-ai/loom/pdd/pdd.js,requires-body=true,tag=精简首页
 
 [MitM]
 hostname=api.pinduoduo.com,api.yangkeduo.com
