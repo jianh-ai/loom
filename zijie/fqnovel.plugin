@@ -26,9 +26,9 @@ AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-log-),(DOMAIN-SUFFIX,pangle.io)),REJE
 AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-dual-event-),(DOMAIN-SUFFIX,pangle.io)),REJECT
 AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,pangolin),(DOMAIN-SUFFIX,sgsnssdk.com)),REJECT
 
-DOMAIN-SUFFIX,content-open.douyin.com,REJECT
-DOMAIN-SUFFIX,webcast3-open-lq.douyin.com
-DOMAIN-SUFFIX,webcast5-open-lq.douyin.com
+# DOMAIN-SUFFIX,content-open.douyin.com,REJECT
+# DOMAIN-SUFFIX,webcast3-open-lq.douyin.com,REJECT
+# DOMAIN-SUFFIX,webcast5-open-lq.douyin.com,REJECT
 
 # zijieapi
 AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com)),REJECT
