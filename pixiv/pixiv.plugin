@@ -6,9 +6,9 @@
 #!date=2025-07-12
 
 [Rule]
-DOMAIN-SUFFIX,imp.pixiv.net,reject
-DOMAIN-SUFFIX,ads-pixiv.net,reject
-DOMAIN-SUFFIX,pixon.ads-pixiv.net,reject
+DOMAIN-SUFFIX,imp.pixiv.net,REJECT-DICT
+DOMAIN-SUFFIX,ads-pixiv.net,REJECT-DICT
+DOMAIN-SUFFIX,pixon.ads-pixiv.net,REJECT-DICT
 
 [Rewrite]
 ^https:\/\/oauth\.secure\.pixiv\.net\/auth\/token response-body-json-jq '.response.user |= (.is_premium = true) | .user |= (.is_premium = true | .require_policy_agreement = false | .x_restrict = 0)'
