@@ -1,97 +1,85 @@
-#!name=fqnovel
+#!name=bilibili
 #!desc=
-#!author=aichan
+#!author=Maasea,kokoryh,RuCu6,Luestr
 #!homepage=
-#!icon=
-#!date=2024-11-28
+#!icon=https://raw.gitcode.com/gagghik1/lonq/raw/main/image/bili.png
+#!date=2025-03-23
+
+[Argument]
+# showUpList=select,"auto","true","false"
+filterTopReplies=switch,"true","false",tag=移除评论广告
+iphoneSkip=switch,"true","false",tag=iphone开启
+ipadSkip=switch,"false","true",tag=ipad开启
 
 [Rule]
-AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT
-# AND,((DOMAIN-KEYWORD,-ttam-),(DOMAIN-SUFFIX,ibyteimg.com)),REJECT
-AND,((DOMAIN-KEYWORD,ssdk-),(DOMAIN-SUFFIX,pangle.io)),REJECT
-AND,((DOMAIN-KEYWORD,pangolin),(DOMAIN-SUFFIX,snssdk.com)),REJECT
-AND,((DOMAIN-KEYWORD,lf),(DOMAIN-KEYWORD,-short.bytetos.com)),REJECT
-# AND,((DOMAIN-KEYWORD,v),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com)),REJECT
-# AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com)),REJECT
-# AND,((DOMAIN-KEYWORD,s),(DOMAIN-KEYWORD,-fe-scm.pglstatp-toutiao.com)),REJECT
-# AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com)),REJECT
-# AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com)),REJECT
-# AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com)),REJECT
-# AND,((DOMAIN-KEYWORD,if),(DOMAIN-KEYWORD,-cdn-tos.bytescm.com)),REJECT //误杀
-# AND,((DOMAIN-KEYWORD,if),(DOMAIN-KEYWORD,-analytics.bytescm.com)),REJECT
-# AND,((DOMAIN-KEYWORD,lf),(DOMAIN-KEYWORD,-analytics.bytescm.com)),REJECT
-# AND,((DOMAIN-KEYWORD,lf),(DOMAIN-KEYWORD,-analytics.bytescm.com)),REJECT
-AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-access-),(DOMAIN-SUFFIX,pangle.io)),REJECT
-AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-log-),(DOMAIN-SUFFIX,pangle.io)),REJECT
-AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-dual-event-),(DOMAIN-SUFFIX,pangle.io)),REJECT
-AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,pangolin),(DOMAIN-SUFFIX,sgsnssdk.com)),REJECT
+HOST-SUFFIX,data.bilibili.com,REJECT-DICT
 
-DOMAIN-SUFFIX,content-open.douyin.com,REJECT
-DOMAIN-SUFFIX,webcast3-open-lq.douyin.com
-DOMAIN-SUFFIX,webcast5-open-lq.douyin.com
+URL-REGEX,^https?:\/\/app\.biliapi\.net\/x\/resource\/peak\/download,REJECT-DICT
+URL-REGEX,^https?:\/\/(?:api|app|grpc)\.bili(?:api|bili)\.(?:net|com)\/x\/mengqi\/v1\/resource,REJECT-DICT
+# 搜索框推荐
+URL-REGEX,^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.interface\.v1\.Search\/DefaultWords,REJECT-DICT
+# 游戏弹窗
+URL-REGEX,^https:\/\/i1\.hdslb\.com\/bfs\/activity-plat\/.*\.png@120w_120h_1e_100p\.png,REJECT-DICT
+# 云视听图标
+URL-REGEX,^https:\/\/i\d\.hdslb\.com\/bfs\/activity-plat\/static\/9bdd988aed64a23976d6d5494533a450\/vBISHozSu0\.png@660w_160h_1e_100p,REJECT-DICT
+# 会员购
+URL-REGEX,^https:\/\/i\d\.hdslb\.com\/bfs\/kfptfe\/floor\/vane6d5eb98329ee47ac8059e2b5710c2550\.png@1e_1c\.avif$,REJECT-DICT
+URL-REGEX,^https:\/\/i\d\.hdslb\.com\/bfs\/kfptfe\/floor\/vane\w+\.gif@1e_1c\.webp$,REJECT-DICT
 
-# zijieapi
-AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com)),REJECT
-AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal-lq),(DOMAIN-SUFFIX,zijieapi.com)),REJECT
-AND,((DOMAIN-KEYWORD,minigame),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com)),REJECT
-# URL-REGEX,"^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/",REJECT
+# 我的抓取
+URL-REGEX,^https?:\/\/.*\/v1\/resource\/.*\.(?:jpg|zip|webp|png|json),REJECT-DICT
+URL-REGEX,^https?:\/\/.*\/v1\/resource\?.*resourceUrl=.*\.(?:jpg|zip|webp|png|json),REJECT-DICT
+URL-REGEX,^https?:\/\/i\d\.hdslb\.com\/bfs\/sycp,REJECT-DICT
+URL-REGEX,^https>:\/\/api\.live\.bilibili\.com\/xlive\/e-commerce-interface\/v1\/ecommerce-user\/get_shopping_info\?,REJECT-DICT
+# URL-REGEX,^https?:\/\/(?:api|app|grpc)\.bili(?:api|bili)\.(?:net|com)\/x\/v\d\/splash\/(show|event|list),REJECT-DICT
+URL-REGEX,^https?:\/\/(?:api|app|grpc)\.bili(?:api|bili)\.(?:net|com)\/x\/v\d\/splash\/(?:brand|show|event|list),REJECT-DICT
 
-DOMAIN-SUFFIX,ad.zijieapi.com,REJECT
-DOMAIN-SUFFIX,mon.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,view.zijieapi.com,REJECT
-DOMAIN-SUFFIX,applog.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,feedback-c.zijieapi.com,REJECT
-DOMAIN-SUFFIX,log.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,mcs.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,os-mon.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,pc-mon.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,starkgame.zijieapi.com,REJECT
-DOMAIN-SUFFIX,timon.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,tnc0-bjlgy.zijieapi.com,REJECT
-DOMAIN-SUFFIX,tnc3-aliec2.zijieapi.com,REJECT
-DOMAIN-SUFFIX,tnc3-aliec1.zijieapi.com,REJECT
-DOMAIN-SUFFIX,tnc3-alisc1.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,tnc3-alisc2.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,tnc0-aliec2.zijieapi.com,REJECT
-# DOMAIN-SUFFIX,tnc0-alisc1.zijieapi.com,REJECT
+# URL-REGEX,^http:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH,REJECT-DICT
+# URL-REGEX,^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH,REJECT-DICT
 
-# snssdk
-# DOMAIN-SUFFIX,i.snssdk.com,REJECT
-# DOMAIN-SUFFIX,is.snssdk.com,REJECT
-DOMAIN-SUFFIX,i-lq.snssdk.com,REJECT
-DOMAIN-SUFFIX,is-lq.snssdk.com,REJECT
-DOMAIN-SUFFIX,bds.snssdk.com,REJECT
-DOMAIN-SUFFIX,log.snssdk.com,REJECT
-DOMAIN-SUFFIX,sdfp.snssdk.com,REJECT
-DOMAIN-SUFFIX,pangolin.snssdk.com,REJECT
-DOMAIN-SUFFIX,extlog.snssdk.com,REJECT
-# DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
+[Rewrite]
+# ^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/(?:list|show|event\/list2)\? response-body-json-jq '.data |= with_entries(if .key | IN("show", "event_list") then .value = [] else . end)'
 
-# toutiao
-DOMAIN-SUFFIX,dm.toutiao.com,REJECT
-DOMAIN-SUFFIX,ad.toutiao.com,REJECT
-DOMAIN-SUFFIX,d.toutiao.com,REJECT
-DOMAIN-SUFFIX,dm.toutiao.com,REJECT
-DOMAIN-SUFFIX,dm-hl.toutiao.com,REJECT
-DOMAIN-SUFFIX,dsp.toutiao.com,REJECT
+^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\? response-body-json-jq 'if .data.items then .data.items |= map(select((.banner_item == null) and (.ad_info == null) and (.card_goto == "av") and (.card_type | IN("small_cover_v2", "large_cover_single_v9", "large_cover_v1")))) end'
 
-DOMAIN-SUFFIX,dig.bdurl.net,REJECT
-DOMAIN-SUFFIX,dig.zjurl.cn,REJECT
-DOMAIN-KEYWORD,pglstatp-toutiao.com,REJECT
-DOMAIN-KEYWORD,pangolin-sdk-toutiao,REJECT
-# DOMAIN-SUFFIX,gromore.pangolin-sdk-toutiao.com,REJECT
-# DOMAIN-SUFFIX,ether-pack.pangolin-sdk-toutiao.com,REJECT
-# DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT
-# DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT
-# DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT
-DOMAIN-SUFFIX,dm.bytedance.com,REJECT
-# DOMAIN-SUFFIX,dm.pstatp.com,REJECT
-# DOMAIN-SUFFIX,s3a.pstatp.com,REJECT
-DOMAIN-SUFFIX,tosv.boe.byted.org,REJECT
-DOMAIN-SUFFIX,tosv.byted.org,REJECT
-DOMAIN-SUFFIX,mssdk-bu.bytedance.com,REJECT
-DOMAIN-SUFFIX,toblog.ctobsnssdk.com,REJECT
-DOMAIN-SUFFIX,mssdk.volces.com,REJECT
-DOMAIN-SUFFIX,lf-ad-ies.bytecdn.cn,REJECT
-DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
-DOMAIN-KEYWORD,asiad.byteactivity,REJECT
+^https:\/\/api\.bilibili\.com\/pgc\/activity\/deliver\/material\/receive\? mock-response-body data-type=text status-code=200 data="{"code":0,"data":{"closeType":"close_win","container":[],"showTime":""},"message":"success"}"
+^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? response-body-json-jq 'del(.data.payment)'
+# 观影去广告 #追番去广告
+^https:\/\/api\.bilibili\.com\/pgc\/page\/(?:bangumi|cinema\/tab)\? response-body-json-jq '.result.modules |= if . then map(if (.style | startswith("tip")) or (.module_id | IN(241, 1283, 1441, 1284)) then .items = [] elif .style | startswith("banner") then .items |= if . then map(select(.link | contains("play"))) else [] end elif .style | startswith("function") then .items |= if . then map(select(.blink | startswith("bilibili"))) else [] end end) end'
+
+^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-body-json-jq 'if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | startswith("ad") | not)) | del(.story_cart_icon, .free_flow_toast)) end'
+
+# 首页搜索栏
+^https:\/\/ap[ip]\.bilibili\.com\/x\/(?:resource\/(?:top\/activity|patch\/tab)|vip\/ads\/materials)\? mock-response-body data-type=text status-code=200 data="{"code":-404,"message":"-404","ttl":1,"data":null}"
+# 直播去广告
+^https:\/\/api\.live\.bilibili\.com\/xlive\/(?:app-interface\/v2\/index\/feed|app-room\/v1\/index\/getInfoBy(?:Room|User))\? response-body-json-jq '.data |= (del(.play_together_info, .play_together_info_v2, .activity_banner_info) | if .function_card then .function_card[] = null end | if .new_tab_info.outer_list then .new_tab_info.outer_list |= map(select(.biz_id != 33)) end | if .card_list then .card_list |= map(select(.card_type | IN("banner_v2", "activity_card_v1") | not)) end | reduce ([["show_reserve_status"], false], [["reserve_info", "show_reserve_status"], false], [["shopping_info", "is_show"], 0]) as [$path, $value] (.; if getpath($path) then setpath($path; $value) end))'
+
+^https:\/\/app\.bilibili\.com\/x\/resource\/show\/skin\? response-body-json-del data.common_equip
+
+^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? response-body-json-jq '.data.vip |= if . != null and .status == 0 then . + { status: 1, type: 2, due_date: 9005270400000, role: 15 } else . end'
+
+[Script]
+http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/? script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.js, requires-body=true,timeout=20,tag=精简我的页面
+http-response ^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.js, requires-body=true,timeout=20,tag=精简首页标签
+
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.interface\.v1\.Teenagers\/ModeStatus script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,tag=青少年模式
+# http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.interface\.v1\.Search\/DefaultWords script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,tag=搜索框推荐
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.show\.v1\.Popular\/Index script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,tag=热门话题
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmView script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,tag=弹幕净化
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.polymer\.app\.search\.v1\.Search\/SearchAll script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,tag=搜索结果
+
+# http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:interface\.v1\.(?:Teenagers\/ModeStatus|Search\/DefaultWords)|show\.v1\.Popular\/Index|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/DmView|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$ script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,argument=[{showUpList}, {filterTopReplies}],tag=视频去广告
+
+http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$ script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.skip.js, requires-body=true,binary-body-mode=true,enable={iphoneSkip},tag=视频去广告
+http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.skip.js, requires-body=true,binary-body-mode=true,enable={ipadSkip},tag=视频去广告
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,tag=视频去广告
+
+
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.dynamic\.v2\.Dynamic\/DynAll script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,argument=[{showUpList}],tag=视频去广告
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed) script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,argument=[{filterTopReplies}],tag=视频去广告
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playurl\.v1\.PlayURL\/PlayView script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,argument=[{filterTopReplies}],tag=视频去广告
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.main\.community\.reply\.v1\.Reply\/MainList script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,argument=[{filterTopReplies}],tag=视频去广告
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.pgc\.gateway\.player\.v2\.PlayURL\/PlayView script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/bili.proto.js, requires-body=true,binary-body-mode=true,argument=[{filterTopReplies}],tag=视频去广告
+
+[MitM]
+hostname=*.biliapi.net,app.bilibili.com,api.bilibili.com,api.live.bilibili.com,i*.hdslb.com
