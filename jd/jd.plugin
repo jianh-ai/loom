@@ -1,0 +1,30 @@
+#!name=jd
+#!desc=
+#!author=RuCu6, Maasea
+#!icon=
+#!date=
+
+[Rule]
+URL-REGEX,^http:\/\/\w{32}\.jddebug\.com\/diagnose\?,REJECT-DICT
+URL-REGEX,^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=start,REJECT-DICT
+URL-REGEX,^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(searchBoxWord|stationPullService|uniformRecommend[06]),REJECT-DICT
+# URL-REGEX,^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=welcomeHome,REJECT-DICT
+# URL-REGEX,^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=basicConfig,REJECT-DICT
+
+[Rewrite]
+^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=basicConfig response-body-json-replace data.JDMessage.socketmonitor.isSocketEstablishedAhead 0 data.JDMessage.socketmonitor.isSocketReport 0 data.JDHttpToolKit.httpdns.httpdns 0 data.FXHH.home.newStyle 0
+
+^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=welcomeHome response-body-json-jq '.floorList |= map(select(.type as $t | ["bottomXview", "float", "photoCeiling", "hybrid", "ruleFloat", "searchIcon", "topRotate", "tabBarAtmosphere"] | index($t) | not)) | .webViewFloorList = [] | del(.promotionTabs) | del(.skuImgList)'
+
+
+[Script]
+http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=deliverLayer script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/jd.js, requires-body=true, tag=净化界面
+http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=getTabHomeInfo script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/jd.js, requires-body=true, tag=净化界面
+http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=myOrderInfo script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/jd.js, requires-body=true, tag=净化界面
+http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=orderTrackBusiness script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/jd.js, requires-body=true, tag=净化界面
+http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=personinfoBusiness script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/jd.js, requires-body=true, tag=净化界面
+# http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=welcomeHome script-path=https://raw.gitcode.com/gagghik1/lonq/raw/main/script/jd.js, requires-body=true, tag=净化界面
+
+
+[MitM]
+hostname=api.m.jd.com
