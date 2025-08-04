@@ -1,0 +1,36 @@
+#!name=meituan
+#!desc=
+#!author=aichan
+#!homepage=
+#!icon=
+#!date=2025-05-01
+
+[Rule]
+IP-CIDR,119.29.29.98/32,REJECT
+IP-CIDR,119.29.29.99/32,REJECT
+IP-CIDR,203.107.1.0/24,REJECT
+URL-REGEX,^https?:\/\/103\.37\.155\.60\/fetch,REJECT
+
+# 主页中置
+URL-REGEX,^https:\/\/p\d\.meituan\.net\/linglong\/\w+\.gif(%40[\w\-]+)*$,REJECT-IMG
+# 侧边悬浮
+# ^https:\/\/p0\.meituan\.net\/travelcube\/7b1797f1a0e9dd936ee134657470507f2067\.(png|png\.webp)$,REJECT-IMG
+# 我的抓取
+URL-REGEX,^https:\/\/p\d\.meituan\.net\/[\d\.]+\/wmbanner\/.*\.gif,REJECT-IMG
+URL-REGEX,^https:\/\/p\d\.meituan\.net\/[\d\.]+\/linglong\/.*\.gif,REJECT-IMG
+URL-REGEX,^https:\/\/p\d\.meituan\.net\/bizad\/.*\.(jpg|webp|gif|jpg\.webp),REJECT-IMG
+URL-REGEX,^https:\/\/p\d\.meituan\.net\/display\/.*\.(gif|jpg|jpg\.webp),REJECT
+URL-REGEX,^https:\/\/p\d\.meituan\.net\/midas\/.*\.(gif|jpg|jpg\.webp),REJECT
+URL-REGEX,^https:\/\/p\d\.meituan\.net\/adunion\/.*\.(webp|gif|jpg|jpg\.webp),REJECT-IMG
+
+# 开屏广告
+URL-REGEX,^https:\/\/img\.meituan\.net\/goodsawardpic\/\w+\.(png|jpg),REJECT-IMG
+URL-REGEX,^https:\/\/img\.meituan\.net\/dpmobile\/\w+\.webp,REJECT-IMG
+URL-REGEX,^https:\/\/img\.meituan\.net\/dpmobile\/\w+\.jpg,REJECT-IMG
+URL-REGEX,^https:\/\/img\.meituan\.net\/dpmobile\/68f9c0dbad896352841ae32219c849e91876046\.png\.webp,REJECT-IMG
+URL-REGEX,^https:\/\/p0\.meituan\.net\/ingee\/0eae7d008842eacabe115d9799dc30ac72211\.png,REJECT-IMG
+# 悬浮红包
+URL-REGEX,^https:\/\/img\.meituan\.net\/goodsawardpic\/\w+\.gif,REJECT-IMG
+
+[MitM]
+hostname=*.meituan.net
