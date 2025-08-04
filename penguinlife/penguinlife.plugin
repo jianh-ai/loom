@@ -1,0 +1,19 @@
+#!name=penguinlife
+#!desc=
+#!author=aichan
+#!homepage=
+#!icon=
+#!date=2024-11-28
+
+[Rule]
+DOMAIN-SUFFIX,adserving.bangdao-tech.com,REJECT-DICT
+DOMAIN-SUFFIX,commercial-operation.bangdao-tech.com,REJECT-DICT
+
+URL-REGEX,^https:\/\/userapi\.qiekj\.com\/alipay\/ad,REJECT-DICT
+URL-REGEX,^https:\/\/userapi\.qiekj\.com\/timedBenefit,REJECT-DICT
+URL-REGEX,^https:\/\/userapi\.qiekj\.com\/slot\/get,REJECT-DICT
+
+# URL-REGEX,^https:\/\/commercial-operation\.bangdao-tech\.com\/app\/adv-distribution,REJECT-DICT
+
+[MitM]
+hostname=userapi.qiekj.com
