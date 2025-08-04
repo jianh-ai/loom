@@ -1,0 +1,13 @@
+#!name=zjzwfw
+#!desc=
+#!author=aichan
+#!homepage=
+#!icon=
+#!date=2025-07-16
+
+[Rule]
+URL-REGEX,^https:\/\/portal\.zjzwfw\.gov\.cn\/media\/oss\/image\/BOPS\/[\w]+\.jpg$,REJECT-DICT
+URL-REGEX,^https:\/\/portal\.zjzwfw\.gov\.cn\/app_api\/appHome\/selectStartPic,REJECT-DICT
+
+[MitM]
+hostname=portal.zjzwfw.gov.cn
