@@ -12,7 +12,8 @@ URL-REGEX,^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$,REJECT
 
 [Rewrite]
 ^https:\/\/napi\.ithome\.com\/api\/douyin\/GetLiveInfo mock-response-body data-type=text status-code=200 data="{\"data\":\"{}\",\"success\":true,\"showType\":null,\"messageType\":null}"
-^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds) response-body-json-jq .data.list |= map(select((.feedType != 10002) and (.feedType != 10003) and (.feedType != 10004) and (.feedType != 10023) and (.feedContent.smallTags[0].text | contains("广告") | not))) | .data.list[]?.feedContent?.focusNewsData? |= map(select(.isAd == false))
+
+^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds) response-body-json-jq .data.list |= map(select((.feedType != 10002) and (.feedType != 10003) and (.feedType != 10004) and (.feedType != 10023) and (.feedContent.smallTags[0].text | contains("广告") | not)) | .feedContent.focusNewsData? |= map(select(.isAd == false)))
 
 [MitM]
 hostname=napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com
