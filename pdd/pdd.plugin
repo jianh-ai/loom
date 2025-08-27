@@ -41,7 +41,7 @@ DOMAIN-SUFFIX,adim.pinduoduo.com,REJECT-DICT
 ^https:\/\/api\.pinduoduo\.com\/search response-body-json-del expansion
 
 [Script]
-http-response ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? script-path=https://fastly.jsdelivr.net/gh/jianh-ai/loom@main/pdd/pdd.js,requires-body=true,tag=精简首页
+http-response ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/pdd/pdd.js,requires-body=true,tag=精简首页
 
 [MitM]
 hostname=api.pinduoduo.com,api.yangkeduo.com
