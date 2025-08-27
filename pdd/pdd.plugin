@@ -2,7 +2,7 @@
 #!desc=
 #!author=RuCu6,ZenmoFeiShi
 #!homepage=
-#!icon=https://fastly.jsdelivr.net/gh/jianh-ai/loom/pdd/pdd.png
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/pdd/pdd.png
 #!date=2024-11-28
 
 [Rule]
@@ -18,9 +18,6 @@ DOMAIN-SUFFIX,adim.pinduoduo.com,REJECT-DICT
 # URL-REGEX,^https?:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union,REJECT-DICT
 # URL-REGEX,^https?:\/\/images(-\d?)\.pinduoduo\.com\/mrk\/,REJECT-DICT
 # URL-REGEX,^https?:\/\/images\.pinduoduo\.com\/marketing_api\/,REJECT-DICT
-URL-REGEX,^https?:\/\/api\.pinduoduo\.com\/api\/social\/device\/info\/report,REJECT-DICT
-URL-REGEX,^http:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/d\?id=\d+&ttl=\d+&dn=[A-Z0-9]{40},REJECT-DICT
-URL-REGEX,^http:\/\/\d{1,3}(\.\d{1,3}){3}\/d4\?appid=\d+&os=\d+&clientVersion=[\d.]+&scene=\d+&front=\d+&titanId=\w+&type=\w+$,REJECT-DICT
 
 [Rewrite]
 ^https:\/\/api\.(pinduoduo|yangkeduo)\.com\/api\/cappuccino\/splash\? reject-dict
@@ -30,11 +27,17 @@ URL-REGEX,^http:\/\/\d{1,3}(\.\d{1,3}){3}\/d4\?appid=\d+&os=\d+&clientVersion=[\
 ^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/(likes|my_order_group|new_chat_group|order_express_group|personal) reject-dict
 ^https:\/\/api\.pinduoduo\.com\/api\/engels\/reviews\/require\/append reject-dict
 ^https:\/\/api\.pinduoduo\.com\/api\/flow\/hungary\/window\/global\/v2\? reject-dict
+
 ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render response-body-json-del bottom_section_list ui.bottom_section ui.live_section.float_info
 ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? response-body-json-del monthly_card_entrance personal_center_style_v2_vo icon_set.icons icon_set.top_personal_icons title_bar_items
+
 ^https:\/\/api\.pinduoduo\.com\/api\/zaire_biz\/chat\/resource\/get_list_data reject-dict
-^https:\/\/api\.pinduoduo\.com\/search response-body-json-del expansion
 # ^https:\/\/api\.pinduoduo\.com\/search_hotquery\? reject-dict
+^https?:\/\/api\.pinduoduo\.com\/api\/social\/device\/info\/report reject-dict
+^http:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/d\?id=\d+&ttl=\d+&dn=[A-Z0-9]{40} reject-dict
+^http:\/\/\d{1,3}(\.\d{1,3}){3}\/d4\?appid=\d+&os=\d+&clientVersion=[\d.]+&scene=\d+&front=\d+&titanId=\w+&type=\w+$ reject-dict
+
+^https:\/\/api\.pinduoduo\.com\/search response-body-json-del expansion
 
 [Script]
 http-response ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? script-path=https://fastly.jsdelivr.net/gh/jianh-ai/loom@main/pdd/pdd.js,requires-body=true,tag=精简首页
