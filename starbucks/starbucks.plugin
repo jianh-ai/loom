@@ -2,11 +2,12 @@
 #!desc=
 #!author=aichan
 #!homepage=
-#!icon=https://fastly.jsdelivr.net/gh/jianh-ai/loom/starbucks/starbucks.png
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/starbucks/starbucks.png
 #!date=2025-08-27
 
 [Rewrite]
 ^https?:\/\/active\.starbucks\.com\.cn\/starcrush\/.*\.jpg$ reject-dict
 
 [MitM]
+
 hostname=active.starbucks.com.cn
