@@ -2,18 +2,19 @@
 #!desc=
 #!author=aichan
 #!homepage=
-#!icon=https://fastly.jsdelivr.net/gh/jianh-ai/loom/penguinlife/penguinlife.png
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/penguinlife/penguinlife.png
 #!date=2024-11-28
 
 [Rule]
 DOMAIN-SUFFIX,adserving.bangdao-tech.com,REJECT-DICT
 DOMAIN-SUFFIX,commercial-operation.bangdao-tech.com,REJECT-DICT
 
-URL-REGEX,^https:\/\/userapi\.qiekj\.com\/alipay\/ad,REJECT-DICT
-URL-REGEX,^https:\/\/userapi\.qiekj\.com\/timedBenefit,REJECT-DICT
-URL-REGEX,^https:\/\/userapi\.qiekj\.com\/slot\/get,REJECT-DICT
+[Rewrite]
+^https:\/\/userapi\.qiekj\.com\/alipay\/ad reject-dict
+^https:\/\/userapi\.qiekj\.com\/timedBenefit reject-dict
+^https:\/\/userapi\.qiekj\.com\/slot\/get reject-dict
 
-# URL-REGEX,^https:\/\/commercial-operation\.bangdao-tech\.com\/app\/adv-distribution,REJECT-DICT
+# ^https:\/\/commercial-operation\.bangdao-tech\.com\/app\/adv-distribution reject-dict
 
 [MitM]
 hostname=userapi.qiekj.com
