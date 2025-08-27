@@ -2,6 +2,7 @@
 #!desc=
 #!author=aichan
 #!homepage=
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/starbucks/starbucks.plugin
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/starbucks/starbucks.png
 #!date=2025-08-27
 
@@ -11,3 +12,4 @@
 [MitM]
 
 hostname=active.starbucks.com.cn
+
