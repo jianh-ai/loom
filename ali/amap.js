@@ -1,7 +1,4 @@
-/*
-引用地址 https://raw.githubusercontent.com/RuCu6/Loon/refs/heads/main/Scripts/amap.js
-*/
-// 2025-08-23 20:30
+// 2025-08-23
 
 const url = $request.url;
 if (!$response.body) $done({});
