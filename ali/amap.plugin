@@ -1,0 +1,70 @@
+#!name=amap
+#!desc=
+#!author=RuCu6
+#!tag=
+#!homepage=
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.png
+#!date=2025-08-24
+
+[Rule]
+AND,((URL-REGEX, "^http:\/\/.+\/amdc\/mobileDispatch"), (USER-AGENT, "AMapiPhone*")),REJECT
+
+DOMAIN-SUFFIX,v.smtcdns.com,REJECT
+DOMAIN-SUFFIX,amap-aos-info-nogw.amap.com,REJECT
+DOMAIN-SUFFIX,free-aos-cdn-image.amap.com,REJECT
+DOMAIN-SUFFIX,ai.amap.com,REJECT-DICT
+DOMAIN-SUFFIX,optimus-ads.amap.com,REJECT-DICT
+
+[Rewrite]
+^https:\/\/gw\.alicdn\.com\/imgextra\/i4\/O1CN014LREeC1EzmaeHU5Ds_!!6000000000423-49-tps-222-78\.webp reject-dict
+
+^https:\/\/m5\.amap\.com\/ws\/shield\/search\/new_hotword\? reject-dict
+^https:\/\/m5\.amap\.com\/ws\/shield\/search_business\/process\/marketingOperationStructured\? response-body-json-del data.commonMaterial data.tipsOperationLocation data.resourcePlacement
+^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/homepage\? response-body-json-del history_tags
+^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/tips_adv\? reject-dict
+^https:\/\/oss\.amap\.com\/ws\/banner\/lists\/\? reject-dict
+^https:\/\/m5\.amap\.com\/ws\/aos\/main\/page\/product\/list\? reject-dict
+^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/(?:main-page-assets|main-page-location|ridewalk-end-fc|usr-profile-fc\/homeV2) reject-dict
+^https:\/\/m5\.amap\.com\/ws\/(?:mapapi\/hint_text\/offline_data|message\/notice\/list|shield\/search\/new_hotword) reject-dict
+^https:\/\/m5\.amap\.com\/ws\/shield\/scene\/recommend\? reject-dict
+^https:\/\/m5\.amap\.com\/ws\/valueadded\/weather\/v2\? reject-dict
+^https:\/\/sns\.amap\.com\/ws\/msgbox\/pull_mp\? reject-dict
+^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:order\/car\/(?:feedback\/get_card_questions|feedback\/viptips|king_toolbox_car_bubble|remark\/satisfactionConf|rights_information)|tips\/onscene_visual_optimization) reject-dict
+^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:pay\/web\/paySuccess\/info\/request|transportation\/diversion\/resource\/driving) reject-dict
+^https:\/\/m5-zb\.amap\.com\/ws\/sharedtrip\/taxi\/order_detail_car_tips\? response-body-json-del data.carTips.data.popupInfo
+
+# 首页底部
+^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/main-page response-body-json-jq '.data.cardList |= if (. | length > 0) then map(select(.dataKey == "ContinueNavigationCard" or .dataKey == "FrequentLocation" or .dataKey == "LoginCard")) else . end | .data.mapBizList |= if (. | length > 0) then map(select(.dataKey == "FindCarVirtualCard")) else . end'
+# 步行导航结束推广卡片
+# ^https:\/\/m5\.amap\.com\/ws\/c3frontend\/af-launch\/page\/main response-body-json-jq '.data.modules.C1EndNaviEngine.data = {}'
+# 路线规划页
+^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/card-service-plan-home response-body-json-jq '.data.children |= if (. | length > 0) then map(select(has("schema") | not)) else . end'
+^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/card-service-(?:car-end|route-plan) reject-dict
+# 打车页面
+^https:\/\/m5-zb\.amap\.com\/ws\/promotion-web\/resource(\/home)?\? response-body-json-jq '.data |= if . then del(.alpha,.banner,.bravo,.bubble,.charlie,.icon,.other,.popup,.push,.tips) else . end'
+^https:\/\/m5-zb\.amap\.com\/ws\/boss\/order_web\/friendly_information response-body-json-jq '.data["105"] |= if . then del(.banners,.carouselTips,.integratedBanners,.integratedTips,.skins,.skinAndTips,.tips) else . end'
+^https:\/\/m5-zb\.amap\.com\/ws\/boss\/car\/order\/content_info response-body-json-jq '.data.lubanData.popup.dataList = []' '.data.lubanData.skin.dataList = []' '.data.matrixData.c3DiversionCard.dataList = []' '.data.matrixData.DiversionCard.dataList = []'
+# 附近页面
+^https:\/\/m5\.amap\.com\/ws\/shield\/search\/nearbyrec_smart\? response-body-json-jq '.data.modules |= map(select(. == "head" or . == "search_hot_words" or . == "feed_rec"))'
+# 我的页面
+^https:\/\/m5\.amap\.com\/ws\/shield\/dsp\/profile\/index\/nodefaasv3\? response-body-json-jq '.data |= if . then (if .tipData then del(.tipData) else . end)|(if .memberInfo then del(.memberInfo) else . end)|(if .topMixedCard then del(.topMixedCard) else . end)|(if (.cardList | length > 0) then .cardList |= map(select(.dataKey == "MyOrderCard")) else . end) else . end'
+# 开屏广告
+^https:\/\/m5\.amap\.com\/ws\/valueadded\/alimama\/splash_screen\? response-body-json-jq '.data.ad |= map((.set.setting.display_time = 0) | (.creative[0].start_time = 3818332800) | (.creative[0].end_time = 3818419199))'
+# 公交
+^https:\/\/m5\.amap\.com\/ws\/bus\/plan\/integrate\? response-body-json-jq '.data.banner_lists.data? |= (if (type=="array" and length>0) then [] else . end) | .data.banner_lists.tips? |= (if (type=="array" and length>0) then [] else . end) | .data.mixed_plans.data.taxiPlans? |= (if (type=="array" and length>0) then [] else . end)'
+^https:\/\/m5\.amap\.com\/ws\/aos\/perception\/publicTravel\/beforeNavi\? response-body-json-jq '.data.common_data.bus_plan_bottom_event.data |= if (. | length > 0) then [] else . end | .data.common_data.bus_plan_bottom_tips.data |= if (. | length > 0) then [] else . end | .data.common_data.bus_plan_segment_event.data |= if (. | length > 0) then [] else . end | .data.front_end.assistant |= if (. | length > 0) then [] else . end'
+# 搜索框
+^https:\/\/m5\.amap\.com\/ws\/shield\/search_bff\/hotword\? response-body-json-jq '.data.headerHotWord = []'
+# ^https:\/\/m5\.amap\.com\/ws\/shield\/search_bff\/hotword\? response-body-json-del data.headerHotWord
+^https:\/\/(?:info|m5)\.amap\.com\/ws\/shield\/search\/common\/coupon\/info response-body-json-jq '.data = {}'
+# ^https:\/\/(?:info|m5)\.amap\.com\/ws\/shield\/search\/common\/coupon\/info response-body-json-del data
+
+[Script]
+http-response ^https:\/\/m5\.amap\.com\/ws\/c3frontend\/(?:af-(?:hotel|launch)\/page\/main|af-nearby\/nearby) script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.js, requires-body=true,tag=移除导航详情页底部酒店、处理附近页
+http-response ^https:\/\/m5\.amap\.com\/ws\/perception\/drive\/(?:routeInfo|routePlan) script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.js, requires-body=true,tag=移除路线规划推广
+http-response ^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/(?:mps|search\/sp|sug|tips_operation_location) script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.js, requires-body=true,tag=移除搜索详情页推广
+http-response ^https:\/\/m5\.amap\.com\/ws\/shield\/frogserver\/aocs\/updatable\/1\? script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.js, requires-body=true,tag=移除首页推广
+
+[MitM]
+hostname=*.amap.com
