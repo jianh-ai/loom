@@ -4,12 +4,18 @@
 #!homepage=
 #!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/starbucks/starbucks.plugin
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/starbucks/starbucks.png
-#!date=2025-08-27
+#!date=2025-08-29
+
+[Rule]
+DOMAIN-SUFFIX,trackinghub.starbucks.com.cn,REJECT
 
 [Rewrite]
-^https?:\/\/active\.starbucks\.com\.cn\/starcrush\/.*\.jpg$ reject-dict
+^https?:\/\/bff\.starbucks\.com\.cn\/app-bff-api\/default\/app-config reject-dict
+^https?:\/\/profile\.starbucks\.com\.cn\/ios\/native-app\/initialize reject-dict
+^https?:\/\/active\.starbucks\.com\.cn\/starcrush\/.*\.jpg reject-dict
+
+[Rewrite]
+^https?:\/\/active\.starbucks\.com\.cn\/starcrush\/.*\.jpg$ 
 
 [MitM]
-
-hostname=active.starbucks.com.cn
-
+hostname=*.starbucks.com.cn
