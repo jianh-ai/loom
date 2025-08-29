@@ -1,0 +1,76 @@
+{
+  "plusPackageViewModels": [
+    {
+      "trackingProperties": {
+        "free_trial_length": 7,
+        "is_family_plan": false,
+        "subscription_item_type": "PREMIUM_SUBSCRIPTION",
+        "subscription_tier": "one_month",
+        "free_trial_period": true
+      },
+      "type": "premium",
+      "advertisableFeatures": [
+        "NO_NETWORK_ADS",
+        "UNLIMITED_HEARTS",
+        "LEGENDARY_LEVEL",
+        "MISTAKES_INBOX",
+        "MASTERY_QUIZ",
+        "NO_SUPER_PROMOS",
+        "LICENSED_SONGS",
+        "CAN_ADD_SECONDARY_MEMBERS"
+      ],
+      "isFamilyPlan": false,
+      "isStudentPlan": false,
+      "productId": "com.duolingo.DuolingoMobile.subscription.Premium.OneMonth.25Q27D.13"
+    },
+    {
+      "trackingProperties": {
+        "free_trial_length": 7,
+        "is_family_plan": false,
+        "subscription_item_type": "PREMIUM_SUBSCRIPTION",
+        "subscription_tier": "twelve_month",
+        "free_trial_period": true
+      },
+      "type": "premium",
+      "advertisableFeatures": [
+        "NO_NETWORK_ADS",
+        "UNLIMITED_HEARTS",
+        "LEGENDARY_LEVEL",
+        "MISTAKES_INBOX",
+        "MASTERY_QUIZ",
+        "NO_SUPER_PROMOS",
+        "LICENSED_SONGS",
+        "CAN_ADD_SECONDARY_MEMBERS"
+      ],
+      "isFamilyPlan": false,
+      "isStudentPlan": false,
+      "productId": "com.duolingo.DuolingoMobile.subscription.Premium.TwelveMonth.25Q27D.Trial7.96"
+    },
+    {
+      "trackingProperties": {
+        "free_trial_length": 7,
+        "is_family_plan": true,
+        "subscription_item_type": "PREMIUM_SUBSCRIPTION",
+        "subscription_tier": "twelve_month",
+        "free_trial_period": true
+      },
+      "type": "premium",
+      "advertisableFeatures": [
+        "NO_NETWORK_ADS",
+        "UNLIMITED_HEARTS",
+        "LEGENDARY_LEVEL",
+        "MISTAKES_INBOX",
+        "MASTERY_QUIZ",
+        "NO_SUPER_PROMOS",
+        "LICENSED_SONGS",
+        "CAN_ADD_SECONDARY_MEMBERS"
+      ],
+      "isFamilyPlan": true,
+      "isStudentPlan": false,
+      "productId": "com.duolingo.DuolingoMobile.subscription.Premium.TwelveMonth.25Q27D.Trial7.120"
+    }
+  ],
+  "subscriptionFeatureGroupId": 0,
+  "productExperiments": [],
+  "layout": "STANDARD_FAMILY_USER_PRICE"
+}
