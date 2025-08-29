@@ -6,8 +6,8 @@
 #!date=2024-11-28
 
 [Rule]
-DOMAIN-SUFFIX,adserving.bangdao-tech.com,REJECT-DICT
-DOMAIN-SUFFIX,commercial-operation.bangdao-tech.com,REJECT-DICT
+DOMAIN-SUFFIX,adserving.bangdao-tech.com,REJECT
+DOMAIN-SUFFIX,commercial-operation.bangdao-tech.com,REJECT
 
 [Rewrite]
 ^https:\/\/userapi\.qiekj\.com\/alipay\/ad reject-dict
