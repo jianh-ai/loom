@@ -5,7 +5,7 @@
 #!homepage=
 #!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.plugin
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/amap.png
-#!date=2025-08-24
+#!date=2025-08-29
 
 [Rule]
 AND,((URL-REGEX, "^http:\/\/.+\/amdc\/mobileDispatch"), (USER-AGENT, "AMapiPhone*")),REJECT
@@ -13,8 +13,8 @@ AND,((URL-REGEX, "^http:\/\/.+\/amdc\/mobileDispatch"), (USER-AGENT, "AMapiPhone
 DOMAIN-SUFFIX,v.smtcdns.com,REJECT
 DOMAIN-SUFFIX,amap-aos-info-nogw.amap.com,REJECT
 DOMAIN-SUFFIX,free-aos-cdn-image.amap.com,REJECT
-DOMAIN-SUFFIX,ai.amap.com,REJECT-DICT
-DOMAIN-SUFFIX,optimus-ads.amap.com,REJECT-DICT
+DOMAIN-SUFFIX,ai.amap.com,REJECT
+DOMAIN-SUFFIX,optimus-ads.amap.com,REJECT
 
 [Rewrite]
 ^https:\/\/gw\.alicdn\.com\/imgextra\/i4\/O1CN014LREeC1EzmaeHU5Ds_!!6000000000423-49-tps-222-78\.webp reject-dict
