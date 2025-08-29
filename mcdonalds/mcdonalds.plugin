@@ -8,6 +8,7 @@
 #!date=2025-08-29
 
 [Rule]
+DOMAIN-SUFFIX,tracking.mcdonalds.com.cn,REJECT
 
 [Rewrite]
 ^https?:\/\/api\.mcd\.cn\/bff\/portal\/richpop reject
