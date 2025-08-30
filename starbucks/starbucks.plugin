@@ -11,11 +11,11 @@ DOMAIN-SUFFIX,trackinghub.starbucks.com.cn,REJECT
 
 [Rewrite]
 ^https?:\/\/bff\.starbucks\.com\.cn\/app-bff-api\/default\/app-config reject-dict
-^https?:\/\/profile\.starbucks\.com\.cn\/ios\/native-app\/initialize reject-dict
+# ^https?:\/\/profile\.starbucks\.com\.cn\/ios\/native-app\/initialize reject-dict
 ^https?:\/\/active\.starbucks\.com\.cn\/starcrush\/.*\.jpg reject-dict
 
 [Rewrite]
 ^https?:\/\/active\.starbucks\.com\.cn\/starcrush\/.*\.jpg$ 
 
 [MitM]
-hostname=*.starbucks.com.cn
+hostname=bff.starbucks.com.cn,active.starbucks.com.cn
