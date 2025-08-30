@@ -1,0 +1,14 @@
+#!name=goodnotes
+#!desc=
+#!author=ddgksf2013,aichan
+#!homepage=
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/goodnotes/goodnotes.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/goodnotes/goodnotes.png
+#!date=2025-07-12
+
+[Rewrite]
+^https:\/\/isi\.csan.goodnotes\.com\/.+\/(receipts|subscribers) header-del X-RevenueCat-ETag
+^https:\/\/isi\.csan.goodnotes\.com\/.+\/(receipts$|subscribers\/[^/]+$) response-body-json-jq '.subscriber.subscriptions["com.goodnotes.gn6_one_time_unlock_3999"]={"is_sandbox":false,"ownership_type":"PURCHASED","period_type":"ONE_TIME","original_purchase_date":"2025-01-01T00:00:00Z","purchase_date":"2025-01-01T00:00:00Z","store":"app_store"}|.subscriber.entitlements.apple_access={"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2025-01-01T00:00:00Z"}|.subscriber.entitlements.gn5={"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2025-01-01T00:00:00Z"}|.subscriber.entitlements.crossplatform_access={"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2025-01-01T00:00:00Z"}|.subscriber.original_purchase_date="2023-12-31T13:14:20Z"|.subscriber.first_seen="2025-02-21T15:10:07Z"|.subscriber.last_seen="2025-02-22T14:52:15Z"|.request_date="2025-02-22T14:52:31Z"|.Attention="解锁成功"'
+
+[MitM]
+hostname=isi.csan.goodnotes.com
