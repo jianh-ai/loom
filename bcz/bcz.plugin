@@ -4,11 +4,11 @@
 #!homepage=
 #!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bcz/bcz.plugin
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/bcz/bcz.png
-#!date=2025-09-05
+#!date=2025-09-06
 
 [Rule]
 DOMAIN-SUFFIX,ad.bczcdn.com,REJECT
-DOMAIN-SUFFIX,advertise.baocozhan.com,REJECT
+DOMAIN-SUFFIX,advertise.baicizhan.com,REJECT
 
 [Rewrite]
 ^https?:\/\/vol\.bczcdn\.com\/adv\/[0-9a-f]+\.jpg reject-dict
