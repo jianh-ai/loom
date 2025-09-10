@@ -9,6 +9,7 @@
 [Rule]
 DOMAIN-SUFFIX,ad.bczcdn.com,REJECT
 DOMAIN-SUFFIX,advertise.baicizhan.com,REJECT
+DOMAIN-SUFFIX,advertise.bczeducation.cn,REJECT
 
 [Rewrite]
 ^https?:\/\/vol\.bczcdn\.com\/adv\/[0-9a-f]+\.jpg reject-dict
