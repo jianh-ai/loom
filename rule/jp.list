@@ -22,5 +22,8 @@ DOMAIN-SUFFIX,kadokawa.co.jp
 DOMAIN-SUFFIX,misskey.io
 DOMAIN-SUFFIX,misskeyusercontent.jp
 
+# nijiyome
+DOMAIN-SUFFIX,nijiyome.jp
+
 # pixiv
 DOMAIN-SUFFIX,pixiv.net
