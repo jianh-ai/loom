@@ -65,10 +65,11 @@ AND,((DOMAIN-SUFFIX,chat.bilibili.com), (OR,((DOMAIN-KEYWORD,stun), (DOMAIN-KEYW
 ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\? response-body-json-jq 'if .data.items then .data.items |= map(select((.banner_item == null) and (.ad_info == null) and (.card_goto == "av") and (.card_type | IN("small_cover_v2", "large_cover_single_v9", "large_cover_v1")))) end'
 ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-body-json-jq 'if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | IN("vertical_ad_av", "vertical_ad_live", "vertical_ad_picture") | not)) | del(.story_cart_icon, .free_flow_toast, .image_infos, .course_info, .game_info)) end'
 ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? response-body-json-jq '.data.vip |= if . != null and .status == 0 then . + { status: 1, type: 2, due_date: 9005270400000, role: 15 } else . end'
+# 精简首页标签
+^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? '.data.tab |= map(select(.id != 3502 and .id != 3503 and .id != 408949 and .id != 136117)) | .data.bottom |= map(select(.id != 670))' '.data.bottom |= map(if .id == 3609 then {"name":"消息","uri":"bilibili://im/home_tab","tab_id":"home_im for overseas","id":3506,"icon_selected":"https://i0.hdslb.com/bfs/legacy/e1ab7c3c7a5b2beb79af328f95f19fc781aaa950.png","pos":4,"icon":"https://i0.hdslb.com/bfs/legacy/a6cb60a3369b85d72986233f6a8774751093aa4e.png"}else . end)' '.data.top |= map(if .id==3510 then {"id":108,"icon":"http://i0.hdslb.com/bfs/archive/9d1c0985b9d0e2da2c2f919cc2ee0e36ea41fd90.png","tab_id":"会员购Top","name":"会员购","uri":"bilibili://mall/home/","pos":2} else . end)'
 
 [Script]
 http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/? script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/bili.js, requires-body=true,timeout=20,tag=精简我的页面
-http-response ^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/bili.js, requires-body=true,timeout=20,tag=精简首页标签
 
 http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.show\.v1\.Popular\/Index script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,tag=热门话题
 http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.polymer\.app\.search\.v1\.Search\/SearchAll script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,tag=搜索结果
