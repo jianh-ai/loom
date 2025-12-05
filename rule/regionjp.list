@@ -7,7 +7,11 @@
 DOMAIN-SUFFIX,dlsite.com
 
 # fanza
+DOMAIN-SUFFIX,dmm.co.jp
 DOMAIN-SUFFIX,dmm.com
+
+# kadokawa
+DOMAIN-SUFFIX,kadokawa.co.jp
 
 # misskey
 DOMAIN-SUFFIX,misskey.io
