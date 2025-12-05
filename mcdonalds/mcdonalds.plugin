@@ -13,6 +13,7 @@ DOMAIN-SUFFIX,tracking.mcdonalds.com.cn,REJECT
 [Rewrite]
 ^https?:\/\/api\.mcd\.cn\/bff\/portal\/richpop reject
 ^https?:\/\/api\.mcd\.cn\/bff\/portal\/home\/(hotActivity|splash) reject
+^https?:\/\/api\.mcd\.cn\/bff\/portal\/version\/upgrade" reject
 
 [MitM]
 hostname=api.mcd.cn
