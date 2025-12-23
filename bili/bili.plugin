@@ -1,17 +1,18 @@
+
 #!name=bilibili
 #!desc=
 #!author=Maasea,kokoryh,RuCu6,Luestr
 #!homepage=
 #!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/bili.plugin
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/bili/bili.png
-#!date=2025-03-23
+#!date=2025-12-23
 
 [Argument]
-# showUpList=select,"show","hide","auto",tag=[动态]中[最常访问]的显示方式
-purifyTopReplies=switch,true,tag=净化评论广告
-purifyWebpage=switch,true,tag=净化直播广告
-airborne=switch,true,tag=净化视频广告
-logLevel=select,"info","off","error","warn","debug",tag=日志等级
+displayUpList=select,"show","hide","auto",tag=[动态]中[最常访问]的显示方式
+purifyComment=switch,true,tag=[评论区]过滤置顶评论广告
+optimizeRequest=switch,true,tag=优化评论区加载
+sponsorBlock=switch,true,tag=空降助手
+logLevel=select,"error","warn","info","debug","off",tag=日志等级
 
 [Rule]
 DOMAIN,api.biliapi.com,REJECT
@@ -21,8 +22,8 @@ DOMAIN,app.biliapi.net,REJECT
 AND,((DOMAIN-SUFFIX,chat.bilibili.com), (OR,((DOMAIN-KEYWORD,stun), (DOMAIN-KEYWORD,tracker)))),REJECT
 
 [Rewrite]
-^https?:\/\/app\.biliapi\.net\/x\/resource\/peak\/download reject-dict
-^https?:\/\/(?:api|app|grpc)\.bili(?:api|bili)\.(?:net|com)\/x\/mengqi\/v1\/resource reject-dict
+^https\/\/app\.biliapi\.net\/x\/resource\/peak\/download reject-dict
+^https\/\/(api|app|grpc)\.bili(api|bili)\.(net|com)\/x\/mengqi\/v1\/resource reject-dict
 # 搜索框推荐
 ^https:\/\/grpc\.biliapi\.net\/bilibili\.app\.interface\.v1\.Search\/DefaultWords$ mock-response-body data-type=base64 data="AAAAACkaHeaQnOe0ouinhumikeOAgeeVquWJp+aIlnVw5Li7IgAoAToAQgBKAA==" mock-data-is-base64=true
 # 游戏弹窗
@@ -33,19 +34,19 @@ AND,((DOMAIN-SUFFIX,chat.bilibili.com), (OR,((DOMAIN-KEYWORD,stun), (DOMAIN-KEYW
 ^https:\/\/i\d\.hdslb\.com\/bfs\/kfptfe\/floor\/vane6d5eb98329ee47ac8059e2b5710c2550\.png@1e_1c\.avif$ reject-dict
 ^https:\/\/i\d\.hdslb\.com\/bfs\/kfptfe\/floor\/vane\w+\.gif@1e_1c\.webp$ reject-dict
 # 我的抓取
-^https?:\/\/.*\/v1\/resource\/.*\.(?:jpg|zip|webp|png|json) reject-dict
-^https?:\/\/.*\/v1\/resource\?.*resourceUrl=.*\.(?:jpg|zip|webp|png|json) reject-dict
-^https?:\/\/i\d\.hdslb\.com\/bfs\/sycp reject-dict
+^https\/\/.*\/v1\/resource\/.*\.(jpg|zip|webp|png|json) reject-dict
+^https\/\/.*\/v1\/resource\?.*resourceUrl=.*\.(jpg|zip|webp|png|json) reject-dict
+^https\/\/i\d\.hdslb\.com\/bfs\/sycp reject-dict
 ^https:\/\/line3-h5-mobile-api\.biligame\.com\/game\/live\/large_card_material\? reject-dict
 ^https>:\/\/api\.live\.bilibili\.com\/xlive\/e-commerce-interface\/v1\/ecommerce-user\/get_shopping_info\? reject-dict
 # ^http:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH reject-dict
 # ^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH reject-dict
-^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/(?:brand|list|show|event\/list2)\? response-body-json-jq '.data |= with_entries(if .key | IN("show", "event_list") then .value = [] else . end)'
+^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/(brand|list|show|event\/list2)\? response-body-json-jq '.data |= with_entries(if .key | IN("show", "event_list") then .value = [] else . end)'
 
 ^https:\/\/api\.bilibili\.com\/pgc\/activity\/deliver\/material\/receive\? mock-response-body data-type=text status-code=200 data="{"code":0,"data":{"closeType":"close_win","container":[],"showTime":""},"message":"success"}"
 ^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? response-body-json-jq 'del(.data.payment)'
 # 观影去广告 #追番去广告
-^https:\/\/api\.bilibili\.com\/pgc\/page\/(?:bangumi|cinema\/tab)\? response-body-json-jq '.result.modules |= if . then map(if (.style | startswith("tip")) or (.module_id | IN(241, 1283, 1441, 1284)) then .items = [] elif .style | startswith("banner") then .items |= if . then map(select(.link | contains("play"))) else [] end elif .style | startswith("function") then .items |= if . then map(select(.blink | startswith("bilibili"))) else [] end end) end'
+^https:\/\/api\.bilibili\.com\/pgc\/page\/(bangumi|cinema\/tab)\? response-body-json-jq '.result.modules |= if . then map(if (.style | startswith("tip")) or (.module_id | IN(241, 1283, 1441, 1284)) then .items = [] elif .style | startswith("banner") then .items |= if . then map(select(.link | contains("play"))) else [] end elif .style | startswith("function") then .items |= if . then map(select(.blink | startswith("bilibili"))) else [] end end) end'
 # 首页搜索栏
 # ^https:\/\/ap[ip]\.bilibili\.com\/x\/(resource\/(top\/activity|patch\/tab)|v2\/search\/square|vip\/ads\/materials)\? mock-response-body data-type=text status-code=200 data="{"code":-404,"message":"-404","ttl":1,"data":null}"
 ^https:\/\/ap[ip]\.bilibili\.com\/x\/(resource\/(top\/activity|patch\/tab)|vip\/ads\/materials)\? mock-response-body data-type=text status-code=200 data="{"code":-404,"message":"-404","ttl":1,"data":null}"
@@ -66,26 +67,30 @@ AND,((DOMAIN-SUFFIX,chat.bilibili.com), (OR,((DOMAIN-KEYWORD,stun), (DOMAIN-KEYW
 ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-body-json-jq 'if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | IN("vertical_ad_av", "vertical_ad_live", "vertical_ad_picture") | not)) | del(.story_cart_icon, .free_flow_toast, .image_infos, .course_info, .game_info)) end'
 ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? response-body-json-jq '.data.vip |= if . != null and .status == 0 then . + { status: 1, type: 2, due_date: 9005270400000, role: 15 } else . end'
 # 首页和底栏
-^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? response-body-json-jq '.data.tab |= map(select(.id != 3502 and .id != 3503 and .id != 408949 and .id != 136117))' '.data.top |= map(select(.id != 3500))' '.data.bottom |= map(select(.id != 670 and .id != 3609))'
+^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? response-body-json-jq '.data.tab |= map(select(.id != 3502 and .id != 3503 and .id != 408949 and .id != 409234 and .id != 136117))' '.data.top |= map(select(.id != 3500))' '.data.bottom |= map(select(.id != 670 and .id != 3609))'
 # 我的页面
-^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-del data.live_tip
-^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-jq 'del(.data.sections_v2[2].items[] | select(.id==400 or .id==401 or .id==968 or .id==990)) | del(.data.sections_v2[3].items[] | select(.id==812 or .id==964)) | del(.data.live_tip | select(.id==3713))'
+# ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-del data.live_tip
+^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-jq 'del(.data.sections_v2[2].items[] | select(.id==400 or .id==401 or .id==2909 or .id==968 or .id==990 or .id==3805)) | del(.data.sections_v2[3].items[] | select(.id==812 or .id==964)) | del(.data.live_tip | select(.id==3713))'
+^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-jq '(.data.sections_v2[2].items[] | select(.id == 3607) | .uri) = "bilibili://mall/home"'
 
 [Script]
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.show\.v1\.Popular\/Index script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,tag=热门话题
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.polymer\.app\.search\.v1\.Search\/SearchAll script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,tag=搜索结果
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.view(?:unite)?\.v1\.View\/(?:View|ViewProgress|RelatesFeed) script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,tag=商品推荐
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmView script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,tag=弹幕净化
+http-request ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.viewunite\.v1\.View\/View|main\.community\.reply\.v1\.Reply\/MainList)$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/request.js, argument=[{purifyComment}, {logLevel}], requires-body=true, binary-body-mode=true, timeout=10, enable={optimizeRequest}, tag=bilibili.request
 
-http-request ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/skip.js, requires-body=true,binary-body-mode=true,enable={airborne},argument=[{logLevel}],tag=视频去广告
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,argument=[{showUpList}, {purifyTopReplies}, {airborne}, {logLevel}],tag=视频去广告
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.dynamic\.v2\.Dynamic\/DynAll script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,argument=[{showUpList}, {purifyTopReplies}, {airborne}, {logLevel}],tag=视频去广告
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playurl\.v1\.PlayURL\/PlayView script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,argument=[{showUpList}, {purifyTopReplies}, {airborne}, {logLevel}],tag=视频去广告
+http-request ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/request.js, argument=[{logLevel}], requires-body=true, binary-body-mode=true, timeout=10, enable={sponsorBlock}, tag=bilibili.airborne
 
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.main\.community\.reply\.v1\.Reply\/MainList script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,argument=[{showUpList}, {purifyTopReplies}, {airborne}, {logLevel}],tag=视频去广告
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.pgc\.gateway\.player\.v2\.PlayURL\/PlayView script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/proto.js, requires-body=true,binary-body-mode=true,argument=[{showUpList}, {purifyTopReplies}, {airborne}, {logLevel}],tag=视频去广告
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.show\.v1\.Popular\/Index$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.dynamic\.v2\.Dynamic\/DynAll$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.view\.v1\.View\/View$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.view\.v1\.View\/ViewProgress$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.view\.v1\.View\/RelatesFeed$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
 
-http-response ^https:\/\/live\.bilibili\.com\/blackboard\/era\/.+\.html\? script-path=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bili/webpage.js, requires-body=true,enable={purifyWebpage},tag=直播去广告
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.viewunite\.v1\.View\/View$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playurl\.v1\.PlayURL\/PlayView$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.polymer\.app\.search\.v1\.Search\/SearchAll$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmView$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
+http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.pgc\.gateway\.player\.v2\.PlayURL\/PlayView$ script-path=https://raw.githubusercontent.com/jianh-ai/loom/main/bili/proto.js argument=[{displayUpList}, {purifyComment}, {sponsorBlock}, {logLevel}] requires-body=true, binary-body-mode=true, tag=bilibili.protobuf
 
 [MitM]
 hostname=*.biliapi.net,app.bilibili.com,api.bilibili.com,api.live.bilibili.com,i*.hdslb.com
