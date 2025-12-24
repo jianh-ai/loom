@@ -4,11 +4,11 @@
 #!homepage=
 #!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/goodnotes/goodnotes.plugin
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/goodnotes/goodnotes.png
-#!date=2025-07-12
+#!date=2025-12-24
 
 [Rewrite]
 ^https:\/\/isi\.csan.goodnotes\.com\/.+\/(receipts|subscribers) header-del X-RevenueCat-ETag
-^https:\/\/isi\.csan.goodnotes\.com\/.+\/(receipts$|subscribers\/[^/]+$) response-body-json-jq '.subscriber.subscriptions["com.goodnotes.gn6_one_time_unlock_3999"]={"is_sandbox":false,"ownership_type":"PURCHASED","period_type":"ONE_TIME","original_purchase_date":"2025-01-01T00:00:00Z","purchase_date":"2025-01-01T00:00:00Z","store":"app_store"}|.subscriber.entitlements.apple_access={"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2025-01-01T00:00:00Z"}|.subscriber.entitlements.gn5={"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2025-01-01T00:00:00Z"}|.subscriber.entitlements.crossplatform_access={"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2025-01-01T00:00:00Z"}|.subscriber.original_purchase_date="2023-12-31T13:14:20Z"|.subscriber.first_seen="2025-02-21T15:10:07Z"|.subscriber.last_seen="2025-02-22T14:52:15Z"|.request_date="2025-02-22T14:52:31Z"|.Attention="解锁成功"'
+^https:\/\/isi\.csan.goodnotes\.com\/.+\/(receipts$|subscribers\/[^/]+$) response-body-json-jq '.subscriber=(.subscriber|.subscriptions["com.goodnotes.gn6_one_time_unlock_3999"]={"is_sandbox":false,"ownership_type":"PURCHASED","period_type":"normal","original_purchase_date":"2022-09-08T01:04:18Z","purchase_date":"2022-09-08T01:04:17Z","store":"app_store"}|.entitlements={apple_access:{"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2022-09-08T01:04:17Z"},gn5:{"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2022-09-08T01:04:17Z"},crossplatform_access:{"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2022-09-08T01:04:17Z"}}|.original_purchase_date="2023-12-31T13:14:20Z"|.original_application_version="2395679.285305451"|.original_app_user_id="10fdb8be-9230-4d6f-91c5-ed36d8cdca88"|.quotas.ai.quota=100)'
 
 [MitM]
 hostname=isi.csan.goodnotes.com
