@@ -15,11 +15,6 @@
 DOMAIN-SUFFIX,titan.pinduoduo.com,REJECT-DICT
 DOMAIN-SUFFIX,dspsdk.pinduoduo.com,REJECT-DICT
 DOMAIN-SUFFIX,adim.pinduoduo.com,REJECT-DICT
-DOMAIN-SUFFIX,ta-a.pinduoduo.com,REJECT
-DOMAIN-SUFFIX,ta.pinduoduo.com,REJECT
-DOMAIN-SUFFIX,th-a.pinduoduo.com,REJECT
-DOMAIN-SUFFIX,th-b.pinduoduo.com,REJECT
-DOMAIN-SUFFIX,th.pinduoduo.com,REJECT
 
 AND,((URL-REGEX, "^http:\/\/\[[0-9a-fA-F:]+\]\/v2\/d\?id=\d+&ttl=\d+&dn=[0-9A-F]+&type=addrs$"), (USER-AGENT, "*com.xunmeng.pinduoduo*")),REJECT
 AND,((URL-REGEX, "^http:\/\/\[[0-9a-fA-F:]+\]\/d4\?appid=\d+&os=\d+&clientVersion=[\d.]+&scene=\d+&front=\d+&titanId=\w+&type=ADDRS$"), (USER-AGENT, "*com.xunmeng.pinduoduo*")),REJECT
