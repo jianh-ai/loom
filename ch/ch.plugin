@@ -1,0 +1,27 @@
+#!name=chunqiuHangkong
+#!desc=
+#!author=
+#!homepage=
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/ch/ch.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ch/ch.png
+#!date=2026-01-09
+
+[Rule]
+URL-REGEX,^https?:\/\/wkdcm2\.tingyun\.com\/initMobileApp,REJECT
+URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECMember\/LatestNews\/query,REJECT
+URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECMember\/psnCenter\/adversAndInfo,REJECT
+URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECProduc\t/homePageRevision/queryRecommendInfo,REJECT
+URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECMember\/LatestNews/getConfigurationOfDrainage,REJECT
+URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECProduc\t/AdvertisingSpaceConfiguration/query,REJECT
+
+URL-REGEX,^https?:\/\/media\.springairlines\.com\/cmsstatic\/2022\/activity\/20220218\/20220218mokuai1dise.png,REJECT
+URL-REGEX,^https?:\/\/appmedia\.springairlines\.com\/cmsstatic\/2025/07/17/2507lvyourmhd.jpg,REJECT
+URL-REGEX,^https?:\/\/appmedia\.springairlines\.com\/cmsstatic\/2025/11/28/remenhuodong202-184-3.png,REJECT
+URL-REGEX,^https?:\/\/appmedia\.springairlines\.com\/cmsstatic\/2025/12/31/251231xfcxingliquan.gif,REJECT
+
+[Rewrite]
+^https?:\/\/gaia\.ch\.com\/ECMember\/vipRightV691/allBottomMenus response-body-json-jq '.appBottomMenuList |= map(select(.abmMenuName != "客服"))'
+^https?:\/\/gaia\.ch\.com\/ECProduct\/popupWindowV\d+\/getPopupWindow response-body-json-del data
+
+[MitM]
+hostname=gaia.ch.com,media.springairlines.com,appmedia.springairlines.com,wkdcm2.tingyun.com
