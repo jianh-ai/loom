@@ -10,9 +10,9 @@
 URL-REGEX,^https?:\/\/wkdcm2\.tingyun\.com\/initMobileApp,REJECT
 URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECMember\/LatestNews\/query,REJECT
 URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECMember\/psnCenter\/adversAndInfo,REJECT
-URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECProduc\/homePageRevision/queryRecommendInfo,REJECT
 URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECMember\/LatestNews/getConfigurationOfDrainage,REJECT
-URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECProduc\/AdvertisingSpaceConfiguration/query,REJECT
+URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECProduct\/AdvertisingSpaceConfiguration/query,REJECT
+URL-REGEX,^https?:\/\/gaia\.ch\.com\/ECProduct\/homePageRevision/queryRecommendInfo,REJECT
 
 URL-REGEX,^https?:\/\/media\.springairlines\.com\/cmsstatic\/2022\/activity\/20220218\/20220218mokuai1dise.png,REJECT
 URL-REGEX,^https?:\/\/appmedia\.springairlines\.com\/cmsstatic\/2025/07/17/2507lvyourmhd.jpg,REJECT
