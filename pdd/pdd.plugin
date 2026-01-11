@@ -4,7 +4,7 @@
 #!homepage=
 #!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/pdd/pdd.plugin
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/pdd/pdd.png
-#!date=2025-11-21
+#!date=2026-01-11
 
 [Rule]
 # URL-REGEX,^https?:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/,REJECT-DICT
