@@ -45,7 +45,7 @@ AND,((URL-REGEX, "^http:\/\/\d{1,3}(\.\d{1,3}){3}\/d4\?appid=\d+&os=\d+&clientVe
 ^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/likes\? reject-dict
 
 ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? response-body-json-del result.dy_module.irregular_banner_dy result.icon_set result.search_bar_hot_query result.dy_module.irregular_banner_dy
-^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? response-body-json-jq '.result.bottom_tabs? |= map(select(.link | IN("index.html", "classification.html", "chat_list.html", "personal.html"))) | .result.buffer_bottom_tabs? |= map(select(.link | IN("index.html", "classification.html", "chat_list.html", "personal.html")))'
+# ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? response-body-json-jq '.result.bottom_tabs? |= map(select(.link | IN("index.html", "classification.html", "chat_list.html", "personal.html"))) | .result.buffer_bottom_tabs? |= map(select(.link | IN("index.html", "classification.html", "chat_list.html", "personal.html")))'
 ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? response-body-json-jq '.result.all_top_opts |= map(del(.selected_image, .image, .height, .width))'
 
 ^https:\/\/api\.pinduoduo\.com\/search\? response-body-json-del expansion
