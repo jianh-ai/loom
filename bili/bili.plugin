@@ -66,10 +66,10 @@ AND,((DOMAIN-SUFFIX,chat.bilibili.com), (OR,((DOMAIN-KEYWORD,stun), (DOMAIN-KEYW
 ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-body-json-jq 'if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | IN("vertical_ad_av", "vertical_ad_live", "vertical_ad_picture") | not)) | del(.story_cart_icon, .free_flow_toast, .image_infos, .course_info, .game_info)) end'
 ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? response-body-json-jq '.data.vip |= if . != null and .status == 0 then . + { status: 1, type: 2, due_date: 9005270400000, role: 15 } else . end'
 # 首页和底栏
-^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? response-body-json-jq '.data.tab |= map(select(.id != 3502 and .id != 3503 and .id != 408949 and .id != 409234 and .id != 136117))' '.data.top |= map(select(.id != 3500))' '.data.bottom |= map(select(.id != 670 and .id != 3609))'
+^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? response-body-json-jq '.data.tab |= map(select(.id != 3502 and .id != 3503 and .id != 408949 and .id != 409234 and .id != 409278 and .id != 136117))' '.data.top |= map(select(.id != 3500))' '.data.bottom |= map(select(.id != 670 and .id != 3609))'
 # 我的页面
 # ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-del data.live_tip
-^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-jq 'del(.data.sections_v2[2].items[] | select(.id==400 or .id==401 or .id==2909 or .id==968 or .id==990 or .id==3805)) | del(.data.sections_v2[3].items[] | select(.id==812 or .id==964)) | del(.data.live_tip | select(.id==3713))'
+^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-jq 'del(.data.sections_v2[2].items[] | select(.id==400 or .id==401 or .id==2909 or .id==968 or .id==990 or .id==3805 or .id==3823 or .id==3829)) | del(.data.sections_v2[3].items[] | select(.id==812 or .id==964)) | del(.data.live_tip | select(.id==3713))'
 ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/mine\? response-body-json-jq '(.data.sections_v2[2].items[] | select(.id == 3607) | .uri) = "bilibili://mall/home"'
 
 [Script]
