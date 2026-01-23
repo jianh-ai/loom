@@ -1,0 +1,13 @@
+#!name=pitravel
+#!desc=
+#!author=aichan
+#!homepage=
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/pitravel/pitravel.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/pitravel/pitravel.png
+#!date=2025-12-24
+
+[Rewrite]
+^https:\/\/www\.pitravel\.cn\/api\/slytherin\/v1\/magazine\/get response-body-json-del data.home_banners
+
+[MitM]
+hostname=www.pitravel.cn
