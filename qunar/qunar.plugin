@@ -1,0 +1,65 @@
+#!name=qunar
+#!desc=
+#!author=
+#!homepage=
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/qunar/qunar.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/qunar/qunar.png
+#!date=2025-09-06
+
+[Rule]
+# > 去哪儿旅行
+URL-REGEX,^https:\/\/qde\.qunar\.com\/preload,REJECT-200
+# 开屏广告
+URL-REGEX,^https:\/\/homefront\.qunar\.com\/front\/splash\/ad,REJECT-DICT
+URL-REGEX,^https:\/\/client\.qunar\.com\/pitcher-proxy\?qrt=p_splashAd,REJECT-DICT
+# 瀑布流
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=content_api_common_desert_damo_getPostList,REJECT-DICT
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_qadInfo,REJECT-DICT
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_logger,REJECT-DICT
+# 我的钱包
+;URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=pp_gw_u_myMainCard,REJECT-DICT
+# 我的右下角悬浮窗
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=pp_gw_u_myPopTask,REJECT-DICT
+# 我的开启消息通知横幅
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=pp_gw_u_myOrderBanner,REJECT-DICT
+# 我的界面下方推广
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_feedlist_recommend,REJECT-DICT
+# 点击率统计
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=h_cns_ctrStatistic,REJECT-DICT
+# 酒店续住界面下方酒店周边
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=h_around_information,REJECT-DICT
+# 内容api通用封装选项卡
+;URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=content_api_common_footprint_tab_getTabList,REJECT-DICT
+# 弹出登陆
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_homePopUp,REJECT-DICT
+# 更新热门城市
+;URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_updateHotCity,REJECT-DICT
+# 首页下拉隐藏卡片
+;URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=qpub_animateSloganView,REJECT-DICT
+# 航班主页更多
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=f_flight_home_more,REJECT-DICT
+# 获取广告id
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=f_sylas_get_adspotId,REJECT-DICT
+# 主页通知横幅
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=home_notice_banner,REJECT-DICT
+# 日志
+;URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_logger,REJECT-DICT
+# 主页剪辑板
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_home_clipboard,REJECT-DICT
+# 动画标语视图
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=qpub_animateSloganView,REJECT-DICT
+# 首页角标横幅
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=qpub_markBanner,REJECT-DICT
+# 获取弹出状态
+;URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=qpub_getPopupStatus,REJECT-DICT
+# 主页弹窗
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=p_homePopUp,REJECT-DICT
+# 展示空间广告
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=t_ga_DisplaySpaceAd,REJECT-DICT
+# 弹出显示记录
+;URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=h_medusa_popupShowRecord,REJECT-DICT
+# 订单热门精选
+URL-REGEX,^https:\/\/slugger\.qunar\.com\/slugger-proxy\?qrt=content_api_common_feed_open_postList,REJECT-DICT
+
+[MitM]
+hostname=slugger.qunar.com,homefront.qunar.com,qde.qunar.com,client.qunar.com
