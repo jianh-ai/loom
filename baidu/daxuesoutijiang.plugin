@@ -1,0 +1,16 @@
+#!name=daxuesoutijiang
+#!desc=
+#!author=aichan
+#!homepage=
+#!icon=https://fastly.jsdelivr.net/gh/jianh-ai/loom/baidu/daxuesoutijiang.png
+#!date=2024-11-28
+
+[Rule]
+DOMAIN-SUFFIX,adx.zuoyebang.com,REJECT
+
+URL-REGEX,^https:\/\/pluto\.zuoyebang\.com\/plutov2\/app\/popstatus,REJECT
+URL-REGEX,^https:\/\/www\.daxuesoutijiang\.com\/pluto/publish\/checkappupdate,REJECT
+URL-REGEX,^https:\\//www\.daxuesoutijiang\.com\/init\/config\/popupconfig,REJECT
+
+[MitM]
+hostname = www.daxuesoutijiang.com, pluto.zuoyebang.com
