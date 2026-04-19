@@ -3,7 +3,7 @@
 #!author=aichan
 #!homepage=
 #!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/ali/taobao.png
-#!date=2025-03-23
+#!date=2026-04-18
 
 [Rule]
 AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"%E6%B7%98%E5%AE%9D*")),REJECT
@@ -24,20 +24,30 @@ DOMAIN-SUFFIX,adashx4ae.ut.taobao.com,REJECT
 DOMAIN-SUFFIX,adashx4sg.ut.taobao.com,REJECT
 DOMAIN-SUFFIX,adashx4yt.m.taobao.com,REJECT
 DOMAIN-SUFFIX,adashxgc.ut.taobao.com,REJECT
-DOMAIN-SUFFIX,h-adashx.ut.dingtalk.com,reject
-DOMAIN-SUFFIX,h-adashx.ut.taobao.com,reject
-DOMAIN-SUFFIX,h-adashx.ut.youku.com,reject
-DOMAIN-SUFFIX,h-adashx4ae.ut.taobao.com,reject
-DOMAIN-SUFFIX,h-adashx4sg.ut.taobao.com,reject
+DOMAIN-SUFFIX,h-adashx.ut.dingtalk.com,REJECT
+DOMAIN-SUFFIX,h-adashx.ut.taobao.com,REJECT
+DOMAIN-SUFFIX,h-adashx.ut.youku.com,REJECT
+DOMAIN-SUFFIX,h-adashx4ae.ut.taobao.com,REJECT
+DOMAIN-SUFFIX,h-adashx4sg.ut.taobao.com,REJECT
 
 # 广告净化
+URL-REGEX,^https?:\/\/g\.alicdn\.com\/asr-pages\/camera-page-2023\/\d+\.\d+\.\d+\/weex\/home\.v\d+\.wlm$,REJECT
+URL-REGEX,^https?:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.miniapp\.fusion\.appinfo\.preload\.get,REJECT
 URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alimama\.etao\.config\.query\/.+?etao_advertise,REJECT-DICT
 URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.taobao\.idle\.home\.welcome,REJECT-DICT
-URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopadvertiseapi\.queryloadingbanner\/,REJECT-DICT
-URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.life\.popup\.get\/,REJECT-DICT
-URL-REGEX,^https:\/\/heic\.alicdn\.com\/imgextra\/i\d\/\d*\/?[\w!]+-\d-(octopus|tps-1125-1602|tps-1080-1920)\.(jp|pn)g_(1\d{3}|9\d{2})x(1\d{3}|9\d{2})q[59]0,REJECT-DICT
-URL-REGEX,^https:\/\/gw\.alicdn\.com\/imgextra\/i\d+\/[\w\d!_~-]+tps-1080-1920\.jpg_1200x1200q90\.jpg_\.webp$,REJECT-DICT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopadvertiseapi\.queryloadingbanner,REJECT-DICT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopadvertiseapi\.queryadvertise,REJECT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.life\.popup\.get\,REJECT-DICT
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.splash\.awesome\.get,REJECT-DICT
+URL-REGEX,"^https:\/\/(?:gw|heic)\.alicdn\.com\/imgextra\/i\d\/\d*\/?[\w!]+-\d-(?:octopus|tps)-(?:1080|1125)-\d{4}\.(?:jpg|png)_(?:1\d{3}|9\d{2})x(?:\d|1\d{3}|9\d{2})q[59]0,REJECT
+
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.trip\.activity\.querytmsresources,REJECT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.o2o\.ad\.gateway\.get,REJECT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.etao\.noah\.query\/.+tao_splash,REJECT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alimusic\.common\.mobileservice\.startinit,REJECT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.advertisementservice\.getadv,REJECT
+URL-REGEX,^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.fliggy\.crm\.screen\.(allresource|predict),REJECT
+
 # 淘宝二楼
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.volvo\.secondfloor\.getconfig,REJECT-DICT
 # 我的订单瀑布流
@@ -45,11 +55,14 @@ URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.volvo\.secondf
 URL-REGEX,^https:\/\/ossgw\.alicdn\.com\/rapid-oss-bucket\/template_online,REJECT-DICT
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub/platform_services_recommended_card,REJECT-DICT
 # 我的淘宝瀑布流
+URL-REGEX,^https:\/\/infinite\.m\.taobao\.com\/app\/newdetail\/post-purchase-weex-waterfall-page,REJECT-DICT
 URL-REGEX,^https:\/\/zres\.alicdn\.com\/post-purchase-weex-waterfall-page,REJECT-DICT
+URL-REGEX,^https:\/\/zconfig\.alibabausercontent\.com\/packconfig\/post-purchase-weex-waterfall-page,REJECT-DICT
+
 URL-REGEX,^https:\/\/ossgw\.alicdn\.com\/rapid-oss-bucket\/\d+/alimp_game_notification_card\.zip,REJECT-DICT
 URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget\/mus_2022_two_column\/*\/weex\/home\.v\d+\.wlm,REJECT-DICT
 URL-REGEX,^https:\/\/web\.m\.taobao\.com\/app\/message-social-front\/wotao-basement\/home,REJECT-DICT
-URL-REGEX,^https:\/\/infinite\.m\.taobao\.com\/app\/newdetail\/post-purchase-weex-waterfall-page,REJECT-DICT
+
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.emas\.publish\.update\.resource\.get,REJECT-DICT
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.awesome\.recommend,REJECT-DICT
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.mp\.ucp\.forward\.gateway,REJECT-DICT
@@ -57,26 +70,57 @@ URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.edgecomputer\.
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.mediaplatform\.live\.videolist\.template\.list,REJECT-DICT
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.shot\.resources\.load,REJECT-DICT
 URL-REGEX,^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.mp\.push\.recommend,REJECT-DICT
+URL-REGEX,^https:\/\/zconfig\.alibabausercontent\.com\/packconfig\/wotao-basement,REJECT-DICT
+URL-REGEX,^https:\/\/acs\.m\.taobao.com\/gw/mtop\.wireless\.skin\.atmosphere\.info,REJECT
+
 # ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.upp\.experience\.control,REJECT-DICT
 # ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.com\.taobao\.wireless\.amp\.newsync,REJECT-DICT
 # ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.mobile\.desktop\.link\.get,REJECT-DICT
 # ^https:\/\/trade-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.reborn\.mclaren,REJECT-DICT
-URL-REGEX,^https:\/\/zconfig\.alibabausercontent\.com\/packconfig\/post-purchase-weex-waterfall-page,REJECT-DICT
+
+# 搜索净化
+# ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.relationrecommend.wirelessrecommend.recommend,REJECT-DICT
+
 # 购物车瀑布流
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_r_feedback_collection_short,REJECT-DICT
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_r_guess_live_card,REJECT-DICT
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_r_v5_item_universal,REJECT-DICT
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_r_gou_ad_ketuo,REJECT-DICT
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/buy_v3_payment_more/,REJECT-DICT
-# 搜索净化
-# ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.relationrecommend.wirelessrecommend.recommend,REJECT-DICT
-# 首页净化
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_home_horizontal_uone_gongge,REJECT-DICT
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_r_universal_card,REJECT-DICT
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_home_horizontal_live_insert_card,REJECT-DICT
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/l_pub\/tx_feed_ad_template_list_image,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_r_live_streaming_card_,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_r_universal_template_card,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/buy_v3_payment_more,REJECT-DICT
+# 首页净化
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_home_\d+_\d+_insert_campaign,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_new_push_square,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_card_interact_fans,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_message_imba_activityhot,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_biz_goodswithtest,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/babel_confirmgoods_pop_no_event,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/new_ol3_separator,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/gamecard,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/taolive_remen_top_video,REJECT
+
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/m_home_horizontal,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/mtb,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/babel_batchconfirm,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/new_babel_batchconfirm,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/new_babel_orderlist,REJECT
+
 URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/l_pub\/m_home_horizontal_uone_gongge,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/l_pub\/tx_feed_ad_template_list_image,REJECT-DICT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/l_pub\/alimp_widget_home_top,REJECT
+URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/l_pub\/mtb,REJECT
+
+URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget-cloud\/BargainCard,REJECT
+URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget-cloud\/qs-zzw-rank-tab,REJECT
+URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget-cloud\/search_door_trending_hot_textList,REJECT
+URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget-cloud\/search_new_weexv2_topbar_sort,REJECT
+
+URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget\/tbs_widget_m3,REJECT
+URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget\/mus_2022_props_two_column,REJECT
+URL-REGEX,^https:\/\/g\.alicdn\.com\/tb-webb-widget\/preposition_filter_color_class_with_pic,REJECT
+
 # ^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/taobaolive,REJECT-DICT
 # ^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/dxm_goods_suggest,REJECT-DICT
 # ^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/88vip,REJECT-DICT
@@ -86,18 +130,10 @@ URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/l_pub\/m_home_horizontal
 # ^https:\/\/dinamicx\.alibabausercontent\.com\/l_pub/taolive_live,REJECT-DICT
 # ^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/taolive,REJECT-DICT
 
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_new_push_square,REJECT-DICT
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_card_interact_fans,REJECT-DICT
-URL-REGEX,^https:\/\/zconfig\.alibabausercontent\.com\/packconfig\/wotao-basement,REJECT-DICT
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_message_imba_activityhot,REJECT-DICT
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/alimp_biz_goodswithtest,REJECT-DICT
-URL-REGEX,^https:\/\/dinamicx\.alibabausercontent\.com\/pub\/gamecard,REJECT-DICT
-
 [Rewrite]
-
-[Script]
-http-response ^https:\/\/poplayer\.template\.alibaba\.com\/.*\.json script-path=https://raw.githubusercontent.com/jianh-ai/Quantumult4myself/main/js/taobao.js, requires-body=true,tag=开屏广告
-http-response ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.splash\.awesome\.get script-path=https://raw.githubusercontent.com/jianh-ai/Quantumult4myself/main/js/taobao.js, requires-body=true,tag=开屏广告
+^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.wireless\.home\.splash\.awesome\.get response-body-json-jq '.data.containers.splash_home_base.base.sections[]?.bizData["taobao-splash"].data[]? |= (.waitTime="0"|.times="0"|.hotStart="false"|.haveVoice="false"|.hideTBLogo="false"|.enable4G="false"|.coldStart="false"|.startTime="3818332800000"|.endTime="3818419199000"|.gmtStart="2090-12-31 00:00:00"|.gmtEnd="2090-12-31 23:59:59"|.gmtStartMs="3818332800000"|.gmtEndMs="3818419199000"|.imgUrl=""|.videoUrl="")'
+^https:\/\/poplayer\.template\.alibaba\.com\/\w+\.json response-body-json-jq '(.res.images = []) | (.res.videos = []) | (.enable = false) | (.mainRes.images = [])'
+^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.cloudvideo\.video\.query response-body-json-jq '.data |= (.duration="0" | .resources=[] | .caches=[] | .respTimeInMs="3818332800000")'
 
 [MitM]
 hostname = dinamicx.alibabausercontent.com, zconfig.alibabausercontent.com, poplayer.template.alibaba.com, guide-acs.m.taobao.com, acs.m.taobao.com, web.m.taobao.com, infinite.m.taobao.com, gw.alicdn.com, g.alicdn.com, ossgw.alicdn.com, zres.alicdn.com, heic.alicdn.com
