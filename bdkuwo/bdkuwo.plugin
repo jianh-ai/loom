@@ -1,0 +1,35 @@
+#!name=bdkuwo
+#!desc=
+#!author=GieGie777,kelee,aichan
+#!homepage=
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/bdkuwo/bdkuwo.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/bdkuwo/bdkuwo.png
+#!date=2026-04-20
+
+[Rule]
+DOMAIN-SUFFIX,tmeadcomm.y.qq.com,REJECT
+
+URL-REGEX,^https:\/\/bd-api\.kuwo\.cn\/api\/service\/banner,REJECT
+URL-REGEX,^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/vipEnter\?,REJECT
+URL-REGEX,^https:\/\/bd-api\.kuwo\.cn\/api\/popup,REJECT
+URL-REGEX,^https:\/\/bd-api\.kuwo\.cn\/api\/service\/version\/popup\?,REJECT
+URL-REGEX,^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/invitation\/assist\/popup\?,REJECT
+URL-REGEX,^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/invitation\/swell\/popup\?,REJECT
+URL-REGEX,^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/lowPriceText\?,REJECT
+
+[Rewrite]
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/home\/index response-body-json-jq '.data.moduleList |= map(select(.id != 0 and .id != 6 and .id != 13 and .id != 11))'
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? response-body-json-del data.groupSign.adStartAppDialog data.groupSign.adGuideTest data.groupSign.playTips data.groupSign.adExitChange data.conf.adGuidePopCount data.conf.adDownListOpen
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? response-body-json-replace data.conf.flowControlConfig.uploadEnable false data.conf.flowControlConfig.p2pEnable false
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/scene\? response-body-json-del data.iosP2PCacheEnable data.warmStartDialog data.adsNotFinishVipPop4DayInterval
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/scene\? response-body-json-replace data.showShopEntry false data.iosP2pEnableSendDataLimit 1
+
+^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? response-body-json-jq '{"data": {},"code": 0}'
+^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/lowPriceText response-body-json-jq '{"data": {},"code": 0}'
+^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? response-body-json-jq '{"data": {},"code": 0}'
+
+[Script]
+http-response ^https?:\/\/(?:(?:bd-api|h5app|bodianyin|ab-bodian)\.kuwo\.cn\/(?:api\/(?:ucenter\/users\/(?:pub|login)|play\/(?:music\/v2\/(?:audioUrl|checkRight)|advert\/info)|service\/(?:music\/(?:info|download\/(?:info|config))|home\/module|advert\/config)|pay\/(?:vip\/sp\/actVip|audition\/url)|advert\/free\/config|popup\/start\/info|rec\/feed)|abtest\/ui\/info)|us\.l\.qq\.com\/exapp|xs\.gdt\.qq\.com\/style_factory\/template_list) script-path=https://raw.githubusercontent.com/WeiGiegie/666/main/bdyy.js, requires-body=true, timeout=60, tag=bodian
+
+[MitM]
+hostname=bd-api.kuwo.cn,ab-bodian.kuwo.cn,us.l.qq.com,xs.gdt.qq.com
