@@ -2,8 +2,8 @@
 #!desc=
 #!author=aichan
 #!homepage=
-#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/pitravel/pitravel.plugin
-#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/pitravel/pitravel.png
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/pitravel/main.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/pitravel/icon.png
 #!date=2025-12-24
 
 [Rewrite]
