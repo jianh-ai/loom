@@ -2,8 +2,8 @@
 #!desc=
 #!author=aichan
 #!homepage=
-#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/zjzwfw/zjzwfw.plugin
-#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/zjzwfw/zjzwfw.png
+#!raw=https://cdn.jsdelivr.net/gh/jianh-ai/loom@main/zjzwfw/main.plugin
+#!icon=https://cdn.jsdelivr.net/gh/jianh-ai/loom/zjzwfw/icon.png
 #!date=2025-07-16
 
 [Rewrite]
